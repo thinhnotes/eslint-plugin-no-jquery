@@ -6,16 +6,21 @@ const rule = {
 		fixable: 'code',
 		schema: [],
 		messages: {
-			avoidName: 'Prefer .on or .trigger to .click'
+			clickErrorMgs: 'Prefer .on or .trigger to .click'
 		}
 	},
 	create( context ) {
+		let isJqueryVar = false;
 		return {
 			'CallExpression:exit': function ( node ) {
-				if ( node.callee.type === 'MemberExpression' && node.callee.property.name === 'click' ) {
+				if ( !isJqueryVar ) {
+					isJqueryVar = isJquery( node );
+				}
+				console.log( isJqueryVar );
+				if ( isJqueryVar && node.callee.type === 'MemberExpression' && node.callee.property.name === 'click' ) {
 					context.report( {
 						node,
-						messageId: 'avoidName',
+						messageId: 'clickErrorMgs',
 						fixable: 'code',
 						fix: function ( fixer ) {
 							return utils.eventShorthandFixer( node, context, fixer, 'click' );
@@ -26,5 +31,16 @@ const rule = {
 		};
 	}
 };
+
+function isJquery( node ) {
+	while ( node.parent && node.callee ) {
+		if ( node.callee && node.callee.name === '$' ) {
+			return true;
+		}
+		node = node.parent;
+	}
+
+	return false;
+}
 
 module.exports = rule;

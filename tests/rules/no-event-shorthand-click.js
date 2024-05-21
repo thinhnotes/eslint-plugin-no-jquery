@@ -7,7 +7,10 @@ const error = 'Prefer .on or .trigger to .click';
 const ruleTester = new RuleTester();
 
 ruleTester.run( 'no-event-shorthand-click', rule, {
-	valid: [ ],
+	valid: [
+		'div123.click()',
+		'div123.click(function() {alert(1);})'
+	],
 	invalid: [
 		{
 			code: '$("div")[0].click()',
@@ -16,15 +19,21 @@ ruleTester.run( 'no-event-shorthand-click', rule, {
 			docgen: false
 		},
 		{
-			code: 'var fileUploadButton = $("#demo"); fileUploadButton.click()',
+			code: 'var fileUploadButton = $("#demo"); var demo2=""; var demo3="12312"; fileUploadButton.click()',
 			errors: [ error ],
-			output: 'var fileUploadButton = $("#demo"); fileUploadButton.trigger("click")',
+			output: 'var fileUploadButton = $("#demo"); var demo2=""; var demo3="12312"; fileUploadButton.trigger("click")',
 			docgen: false
 		},
 		{
 			code: '$(".popupImage:last")[0].click()',
 			errors: [ error ],
 			output: '$(".popupImage:last")[0].trigger("click")',
+			docgen: false
+		},
+		{
+			code: '$("#div123").click(function() {alert(1);})',
+			errors: [ error ],
+			output: '$("#div123").on("click", function() {alert(1);})',
 			docgen: false
 		}
 	]
