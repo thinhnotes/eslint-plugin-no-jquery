@@ -61,7 +61,6 @@ const rule = {
 				if ( !isJqueryVar ) {
 					isJqueryVar = isJquery( node );
 				}
-				console.log( isJqueryVar );
 				if ( isJqueryVar && node.callee.type === 'MemberExpression' && events.includes( node.callee.property.name ) ) {
 					context.report( {
 						node,
