@@ -129,7 +129,7 @@ module.exports = {
 		deprecated: {
 			extends: 'plugin:no-jquery/deprecated-3.7',
 			rules: {
-				'no-jquery/no-event-shorthand-click': [ 'warn', {} ]
+				'no-jquery/no-event-shorthand-click': [ 'warn' ]
 			}
 		},
 		// Use this config if you're writing code targetting jQuery 3.7.x environments.
