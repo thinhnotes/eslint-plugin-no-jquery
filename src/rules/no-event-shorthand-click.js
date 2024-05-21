@@ -13,7 +13,6 @@ const rule = {
 		return {
 			'CallExpression:exit': function ( node ) {
 				if ( node.callee.type === 'MemberExpression' && node.callee.property.name === 'click' ) {
-					console.log( 'node', node.callee.object );
 					context.report( {
 						node,
 						messageId: 'avoidName',

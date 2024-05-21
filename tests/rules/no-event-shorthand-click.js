@@ -7,7 +7,7 @@ const error = 'Prefer .on or .trigger to .click';
 const ruleTester = new RuleTester();
 
 ruleTester.run( 'no-event-shorthand-click', rule, {
-	valid: [  ],
+	valid: [ ],
 	invalid: [
 		{
 			code: '$("div")[0].click()',
