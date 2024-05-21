@@ -32,6 +32,7 @@ module.exports = {
 		'no-error-shorthand': require( './rules/no-error-shorthand' ),
 		'no-escape-selector': require( './rules/no-escape-selector' ),
 		'no-event-shorthand': require( './rules/no-event-shorthand' ),
+		'no-event-shorthand-click': require( './rules/no-event-shorthand-click' ),
 		'no-extend': require( './rules/no-extend' ),
 		'no-fade': require( './rules/no-fade' ),
 		'no-filter': require( './rules/no-filter' ),
@@ -126,7 +127,10 @@ module.exports = {
 		},
 		// Use this config if you want to avoid all known deprecated jQuery tools.
 		deprecated: {
-			extends: 'plugin:no-jquery/deprecated-3.7'
+			extends: 'plugin:no-jquery/deprecated-3.7',
+			rules: {
+				'no-jquery/no-event-shorthand-click': [ 'warn', {} ]
+			}
 		},
 		// Use this config if you're writing code targetting jQuery 3.7.x environments.
 		'deprecated-3.7': {
